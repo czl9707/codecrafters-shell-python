@@ -10,10 +10,15 @@ def cmd_handler(cmd: str) -> None:
         case "exit":
             code = int(tokens[1]) if len(tokens) > 1 else 0
             exit(code)
+        case "echo":
+            msg = cmd[4:].strip()
+            sys.stdout.write(msg)
+            sys.stdout.write("\n")
+            sys.stdout.flush()            
         case _:
             sys.stdout.write(f"{command}: command not found\n")
             sys.stdout.flush()
-
+        
 def main():
     # Uncomment this block to pass the first stage
     while True:
