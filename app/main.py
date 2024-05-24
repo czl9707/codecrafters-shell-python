@@ -7,12 +7,13 @@ def cmd_handler(cmd: str) -> None:
 
 def main():
     # Uncomment this block to pass the first stage
-    sys.stdout.write("$ ")
-    sys.stdout.flush()
+    while True:
+        sys.stdout.write("$ ")
+        sys.stdout.flush()
 
-    # Wait for user input
-    cmd = input()
-    cmd_handler(cmd)
+        # Wait for user input
+        cmd = input()
+        cmd_handler(cmd)
 
 
 if __name__ == "__main__":
