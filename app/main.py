@@ -2,7 +2,7 @@ import sys
 
 def cmd_handler(cmd: str) -> None:
     command = cmd.split(" ")[0]
-    sys.stdout.write(f"{command}: command not found")
+    sys.stdout.writelines(f"{command}: command not found")
     sys.stdout.flush()
 
 def main():
