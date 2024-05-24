@@ -1,9 +1,18 @@
 import sys
 
 def cmd_handler(cmd: str) -> None:
-    command = cmd.split(" ")[0]
-    sys.stdout.write(f"{command}: command not found\n")
-    sys.stdout.flush()
+    tokens = [t for t in cmd.split(" ") if len(t) > 0]
+    if not tokens:
+        return
+    
+    command = tokens[0]
+    match command:
+        case "exit":
+            code = int(tokens[1]) if len(tokens) > 1 else 0
+            exit(code)
+        case _:
+            sys.stdout.write(f"{command}: command not found\n")
+            sys.stdout.flush()
 
 def main():
     # Uncomment this block to pass the first stage
