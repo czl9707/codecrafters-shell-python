@@ -40,6 +40,10 @@ def cmd_handler(cmd: str) -> None:
             sys.stdout.write("\n")
             sys.stdout.flush()                
         case _:
+            if full_path := find_path_executable(command):
+                os.system(cmd)
+                return
+            
             sys.stdout.write(f"{command}: command not found\n")
             sys.stdout.flush()
         
