@@ -7,7 +7,7 @@ def find_path_executable(exe: str) -> Optional[str]:
     paths = (pathlib.Path(p) for p in os.environ["PATH"].split(":"))
     
     for path in paths:
-        if exe in os.listdir(path):
+        if path.exists() and  exe in os.listdir(path):
             return str(path.joinpath(exe))
 
     return None
