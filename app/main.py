@@ -1,5 +1,18 @@
+import os
+import pathlib
 import sys
+from typing import Optional
 
+def find_path_executable(exe: str) -> Optional[str]:
+    paths = (pathlib.Path(p) for p in os.environ["PATH"].split(":"))
+    
+    for path in paths:
+        if exe in os.listdir(path):
+            return str(path.joinpath(exe))
+
+    return None
+        
+        
 def cmd_handler(cmd: str) -> None:
     tokens = [t for t in cmd.split(" ") if len(t) > 0]
     if not tokens:
@@ -19,6 +32,8 @@ def cmd_handler(cmd: str) -> None:
             tgt_command = tokens[1]
             if tgt_command in ("type", "echo", "exit"):
                 sys.stdout.write(f"{tgt_command} is a shell builtin")
+            elif full_path := find_path_executable(tgt_command):
+                sys.stdout.write(f"{tgt_command} is {full_path}")
             else:
                 sys.stdout.write(f"{tgt_command} not found")
                 
