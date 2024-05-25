@@ -40,6 +40,11 @@ def cmd_handler(cmd: str) -> None:
             sys.stdout.write("\n")
             sys.stdout.flush()                
         case _:
+            if command.startswith("/"):
+                if pathlib.Path(command).exists():
+                    os.system(cmd)
+                    return
+            
             if full_path := find_path_executable(command):
                 os.system(cmd)
                 return
