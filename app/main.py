@@ -14,7 +14,16 @@ def cmd_handler(cmd: str) -> None:
             msg = cmd[4:].strip()
             sys.stdout.write(msg)
             sys.stdout.write("\n")
-            sys.stdout.flush()            
+            sys.stdout.flush()
+        case "type":
+            tgt_command = tokens[1]
+            if tgt_command in ("type", "echo", "exit"):
+                sys.stdout.write(f"{tgt_command} is a shell builtin")
+            else:
+                sys.stdout.write(f"{tgt_command} not found")
+                
+            sys.stdout.write("\n")
+            sys.stdout.flush()                
         case _:
             sys.stdout.write(f"{command}: command not found\n")
             sys.stdout.flush()
